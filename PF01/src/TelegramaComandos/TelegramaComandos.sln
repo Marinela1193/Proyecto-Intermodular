@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36127.28 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelegramaComandos", "TelegramaComandos\TelegramaComandos.csproj", "{4DBBFA84-D242-44B5-A110-EFC2A6435923}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4DBBFA84-D242-44B5-A110-EFC2A6435923}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DBBFA84-D242-44B5-A110-EFC2A6435923}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DBBFA84-D242-44B5-A110-EFC2A6435923}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DBBFA84-D242-44B5-A110-EFC2A6435923}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {814490F0-02FB-4BD9-933F-DAC69F7EAB40}
+	EndGlobalSection
+EndGlobal
