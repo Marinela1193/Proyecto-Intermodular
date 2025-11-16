@@ -43,11 +43,26 @@ public class MyDate {
             throw new IllegalArgumentException(ERR_INVALID_DATE);
     }
     private int daysInMonth(Months month, int year){
-        return switch (month) {
-            case APRIL, JUNE, SEPTEMBER, NOVEMBER -> 30;
-            case FEBRUARY -> isLeapYear(year) ? 29 : 28;
-            default -> 31;
-        };
+        int days;
+        switch (month) {
+            case APRIL:
+            case JUNE:
+            case SEPTEMBER:
+            case NOVEMBER:
+                days = 30;
+                break;
+            case FEBRUARY:
+                if (isLeapYear(year)) {
+                    days = 29;
+                } else {
+                    days = 28;
+                }
+                break;
+            default:
+                days = 31;
+                break;
+        }
+        return days;
     }
 
     private boolean isLeapYear(int year) {
@@ -96,7 +111,6 @@ public class MyDate {
     public Months getMonth(){
         return  this.month;
     }
-
 
 
     public enum Days {
