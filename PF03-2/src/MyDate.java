@@ -6,15 +6,55 @@ public class MyDate {
     public static final String ERR_INVALID_DAY = "Day value not valid";
     public static final String ERR_INVALID_DATE = "Invalid date";
     private Months month;
-    private Days day;
+    private int day;
+    private int year;
 
-    public MyDate(int i, Months months, int i1) {
+    public MyDate(int day, Months month, int year) {
+        validateYear(year);
+        validateDay(day, month, year);
+
+        this.day = day;
+        this.month = month;
+        this.year = year;
     }
 
     public MyDate() {
 
     }
 
+    private void validateYear(int year) {
+        if (year < 0)
+            throw new IllegalArgumentException(ERR_INVALID_YEAR);
+    }
+
+    private void validateMonth(int month){
+        if (month < 0 || month > 12){
+            throw new IllegalArgumentException(ERR_INVALID_MONTH);
+        }
+    }
+
+    private void validateDay(int day, Months month, int year){
+        if (day < 1 || day > 31)
+            throw new IllegalArgumentException(ERR_INVALID_DAY);
+
+        int max = daysInMonth(month, year);
+
+        if (day > max)
+            throw new IllegalArgumentException(ERR_INVALID_DATE);
+    }
+    private int daysInMonth(Months month, int year){
+        return switch (month) {
+            case APRIL, JUNE, SEPTEMBER, NOVEMBER -> 30;
+            case FEBRUARY -> isLeapYear(year) ? 29 : 28;
+            default -> 31;
+        };
+    }
+
+    private boolean isLeapYear(int year) {
+        if (year % 400 == 0) return true;
+        if (year % 100 == 0) return false;
+        return year % 4 == 0;
+    }
 
     public enum Months {
         JANUARY(1),
@@ -45,6 +85,12 @@ public class MyDate {
     }
 
     public void setMonth(Months month) {
+        validateMonth(month.ordinal());
+
+        if (this.day > daysInMonth(month, this.year))
+            throw new IllegalArgumentException(ERR_INVALID_MONTH);
+
+        this.month = month;
     }
 
     public Months getMonth(){
@@ -76,17 +122,27 @@ public class MyDate {
     }
 
     public void setDay(int day) {
+        if (day < 1 || day > 31)
+            throw new IllegalArgumentException(ERR_INVALID_DAY);
+
+        if (this.month != null && this.year != 0) {
+            if (day > daysInMonth(this.month, this.year))
+                throw new IllegalArgumentException(ERR_INVALID_DAY);
+        }
+        this.day = day;
     }
 
-    public Days getDay(){
+    public int getDay(){
         return this.day;
     }
 
-    //declaramos los años para recogerlos en los testers
-
-    public int year;
-
     public void setYear(int year) {
+        validateYear(year);
+
+        if (this.month == Months.FEBRUARY && this.day == 29 && !isLeapYear(year))
+            throw new IllegalArgumentException(ERR_INVALID_YEAR);
+
+        this.year = year;
     }
 
     public int getYear(){

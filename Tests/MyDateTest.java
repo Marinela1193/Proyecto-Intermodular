@@ -10,11 +10,12 @@ public class MyDateTest {
     public void myDateCorrectEmptyDateTest() {
         MyDate myDate = new MyDate();
     }
+
     @ParameterizedTest
     @CsvSource({"12, FEBRUARY, 2000", "1, JANUARY, 1999", "31, DECEMBER, 2001"})
     public void myDateCorrectDateTest(int day, MyDate.Months month, int year) {
         MyDate myDate;
-        // First check: a valid date from a leap year
+
         try {
             myDate = new MyDate(day, month, year);
         }
@@ -27,7 +28,7 @@ public class MyDateTest {
     @ValueSource(ints = {0, 4, 400, 2000, 2004})
     public void myDateValidLeapYear(int year) {
         MyDate myDate;
-        // This test will be successful if an exception is thrown
+
         try {
             myDate = new MyDate(29, MyDate.Months.FEBRUARY, year);
         }
@@ -40,7 +41,7 @@ public class MyDateTest {
     @ValueSource(ints = {-1, 1, 100, 1000, 1998, 1999, 2001, 2002, 2003, 2005, 2006})
     public void myDateNotALeapYear(int year) {
         MyDate myDate;
-        // This test will be successful if an exception is thrown
+
         try {
             myDate = new MyDate(29, MyDate.Months.FEBRUARY, year);
         }
@@ -55,7 +56,7 @@ public class MyDateTest {
     @EnumSource(value = MyDate.Months.class, names = {"FEBRUARY", "APRIL", "JUNE", "SEPTEMBER", "NOVEMBER"})
     public void myDateInvalidMonthChange(MyDate.Months month) {
         MyDate myDate;
-        // This test will be successful if an exception is thrown
+
         try {
             myDate = new MyDate(31, MyDate.Months.MARCH, 2023);
             myDate.setMonth(month);
@@ -70,7 +71,7 @@ public class MyDateTest {
     @Test
     public void myDateInvalidMonthChange2() {
         MyDate myDate;
-        // This test will be successful if an exception is thrown
+
         try {
             myDate = new MyDate(29, MyDate.Months.MARCH, 2023);
             myDate.setMonth(MyDate.Months.FEBRUARY);
@@ -86,7 +87,7 @@ public class MyDateTest {
     @ValueSource(ints = {-1, 0, 31, 32, 50})
     public void myDateInvalidDayChange(int day) {
         MyDate myDate;
-        // This test will be successful if an exception is thrown
+
         try {
             myDate = new MyDate(30, MyDate.Months.APRIL, 2023);
             myDate.setDay(day);
@@ -102,7 +103,6 @@ public class MyDateTest {
     @ValueSource(ints = {-1, 1, 1998, 1999, 2001, 2002, 2003, 2005, 2006})
     public void myDateInvalidYear(int year) {
         MyDate myDate;
-        // This test will be successful if an exception is thrown
         try {
             myDate = new MyDate(29, MyDate.Months.FEBRUARY, 2000);
             myDate.setYear(year);
